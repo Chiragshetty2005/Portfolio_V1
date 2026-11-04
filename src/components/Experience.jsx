@@ -5,6 +5,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { Euler, Group, Vector3 } from "three";
 import { usePlay } from "../contexts/Play";
+import { chapters } from "../data/chapters";
 import { fadeOnBeforeCompile } from "../utils/fadeMaterial";
 import { Airplane } from "./Airplane";
 import { Background } from "./Background";
@@ -41,51 +42,16 @@ export const Experience = () => {
     return new THREE.CatmullRomCurve3(curvePoints, false, "catmullrom", 0.5);
   }, []);
 
-  const textSections = useMemo(() => {
-    return [
-      {
-        cameraRailDist: -1,
-        position: new Vector3(
-          curvePoints[1].x - 3,
-          curvePoints[1].y,
-          curvePoints[1].z
-        ),
-        subtitle: `Welcome to Wawatmos,
-Have a seat and enjoy the ride!`,
-      },
-      {
-        cameraRailDist: 1.5,
-        position: new Vector3(
-          curvePoints[2].x + 2,
-          curvePoints[2].y,
-          curvePoints[2].z
-        ),
-        title: "Services",
-        subtitle: `Do you want a drink?
-We have a wide range of beverages!`,
-      },
-      {
-        cameraRailDist: -1,
-        position: new Vector3(
-          curvePoints[3].x - 3,
-          curvePoints[3].y,
-          curvePoints[3].z
-        ),
-        title: "Fear of flying?",
-        subtitle: `Our flight attendants will help you have a great journey`,
-      },
-      {
-        cameraRailDist: 1.5,
-        position: new Vector3(
-          curvePoints[4].x + 3.5,
-          curvePoints[4].y,
-          curvePoints[4].z - 12
-        ),
-        title: "Movies",
-        subtitle: `We provide a large selection of medias, we highly recommend you Porco Rosso during the flight`,
-      },
-    ];
-  }, []);
+  const textSections = useMemo(
+    () =>
+      chapters.map((chapter) => ({
+        cameraRailDist: chapter.rail,
+        position: new Vector3(...chapter.position),
+        title: chapter.title,
+        subtitle: chapter.subtitle,
+      })),
+    []
+  );
 
   const clouds = useMemo(
     () => [
@@ -237,6 +203,60 @@ We have a wide range of beverages!`,
           curvePoints[4].z - 62
         ),
         rotation: new Euler(Math.PI / 3, 0, Math.PI / 3),
+      },
+      // FIFTH POINT - Experience
+      {
+        scale: new Vector3(3, 3, 3),
+        position: new Vector3(
+          curvePoints[5].x + 8,
+          curvePoints[5].y - 8,
+          curvePoints[5].z + 50
+        ),
+      },
+      {
+        scale: new Vector3(4, 4, 4),
+        position: new Vector3(
+          curvePoints[5].x - 14,
+          curvePoints[5].y + 3,
+          curvePoints[5].z - 30
+        ),
+        rotation: new Euler(0, Math.PI / 5, 0),
+      },
+      {
+        scale: new Vector3(5, 5, 5),
+        position: new Vector3(
+          curvePoints[5].x + 10,
+          curvePoints[5].y - 4,
+          curvePoints[5].z - 90
+        ),
+        rotation: new Euler(Math.PI / 4, 0, Math.PI / 4),
+      },
+      // SIXTH POINT - Education
+      {
+        scale: new Vector3(3, 3, 3),
+        position: new Vector3(
+          curvePoints[6].x - 10,
+          curvePoints[6].y - 6,
+          curvePoints[6].z + 50
+        ),
+      },
+      {
+        scale: new Vector3(4, 4, 4),
+        position: new Vector3(
+          curvePoints[6].x + 12,
+          curvePoints[6].y + 2,
+          curvePoints[6].z - 40
+        ),
+        rotation: new Euler(Math.PI / 5, 0, Math.PI / 6),
+      },
+      {
+        scale: new Vector3(3, 3, 3),
+        position: new Vector3(
+          curvePoints[6].x - 6,
+          curvePoints[6].y + 8,
+          curvePoints[6].z - 90
+        ),
+        rotation: new Euler(0, Math.PI / 3, 0),
       },
       // FINAL
       {
@@ -452,6 +472,16 @@ We have a wide range of beverages!`,
       duration: 1,
       colorA: "#81318b",
       colorB: "#55ab8f",
+    });
+    tl.current.to(backgroundColors.current, {
+      duration: 1,
+      colorA: "#2b2d7a",
+      colorB: "#ff6b6b",
+    });
+    tl.current.to(backgroundColors.current, {
+      duration: 1,
+      colorA: "#0f1035",
+      colorB: "#38bdf8",
     });
 
     tl.current.pause();

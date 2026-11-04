@@ -568,13 +568,13 @@ a {
 }
 
 .page-header__title {
-  max-width: 22ch;
+  max-width: 28ch;
   font-size: clamp(2.8rem, 5.4vw, 5rem);
 }
 
 .page-header__lede {
   max-width: 56ch;
-  margin-top: clamp(28px, 3.5vw, 44px);
+  margin-top: clamp(32px, 4vw, 52px);
   color: var(--ink-2);
   font-size: clamp(1rem, 1.5vw, 1.22rem);
   line-height: 1.65;
@@ -839,7 +839,7 @@ a {
 
 .case__tagline {
   max-width: 54ch;
-  margin-top: 22px;
+  margin-top: 32px;
   color: var(--ink-2);
   font-size: clamp(1rem, 1.5vw, 1.22rem);
   line-height: 1.65;
@@ -1607,7 +1607,7 @@ a {
 }
 
 .resume__role {
-  margin-top: 8px;
+  margin-top: 16px;
   color: var(--muted);
   font-family: var(--mono);
   font-size: 0.62rem;
